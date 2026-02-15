@@ -20,6 +20,14 @@
     text-align: center;
 }
 
+.app__info {
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+    text-align: center;
+    line-height: 1.5;
+    margin: 0;
+}
+
 .app__inputs {
     display: flex;
     flex-direction: column;
@@ -307,6 +315,27 @@
 .race-predictions__time {
     font-size: 0.9375rem;
     font-weight: 700;
+}
+
+/* ── Footer ── */
+
+.app__footer {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.app__github-link {
+    color: var(--color-text-muted);
+    transition: color 0.15s ease;
+}
+
+.app__github-link:hover {
+    color: var(--color-text);
+}
+
+.app__github-icon {
+    width: 1.5rem;
+    height: 1.5rem;
 }
 
 /* ── Responsive ── */
