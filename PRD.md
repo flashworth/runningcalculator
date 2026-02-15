@@ -185,10 +185,62 @@ This section is only visible when a valid pace can be derived (i.e., the results
 
 The section should be visually distinct from the results panel — same card-style treatment but clearly a separate block. Each race is shown on its own row with the race name on the left and the predicted time on the right.
 
+## Future Enhancement: Progressive Web App (PWA)
+
+**Status:** Not implemented in v1. Planned for future release.
+
+Convert the app into a Progressive Web App to enable:
+
+- **Add to Home Screen** — installable on mobile devices
+- **Offline functionality** — works without network connection after first visit
+- **Native app experience** — runs in standalone mode (no browser chrome)
+
+### Requirements
+
+1. **Web App Manifest** (`public/manifest.json`)
+   - App name, short name, description
+   - Icons at 192x192 and 512x512 (PNG, maskable)
+   - Display mode: `standalone`
+   - Background color: `#1a1a2e` (dark mode)
+   - Theme color: `#4f8cff` (primary)
+   - Orientation: `portrait`
+
+2. **Service Worker** (`public/sw.js`)
+   - Cache strategy: cache-first with network fallback
+   - Cache static assets on install: `/`, `/index.html`, `/manifest.json`, CSS, JS bundles
+   - Version the cache name for updates
+   - Clean up old caches on activation
+
+3. **Service Worker Registration** (`src/main.tsx`)
+   - Register `/sw.js` on window load
+   - Silent failure if service workers unsupported
+
+4. **HTML Updates** (`index.html`)
+   - `<link rel="manifest" href="/manifest.json" />`
+   - Apple-specific meta tags for iOS compatibility:
+     - `<meta name="apple-mobile-web-app-capable" content="yes" />`
+     - `<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />`
+     - `<link rel="apple-touch-icon" href="/icon-192.png" />`
+
+5. **Icon Generation**
+   - Create 192x192 and 512x512 PNG icons from existing favicon or design new ones
+   - Ensure icons meet maskable requirements for Android
+
+6. **Deployment Requirements**
+   - HTTPS is mandatory for service workers (production only — localhost works without HTTPS)
+   - Verify PWA criteria with Lighthouse audit
+
+### Testing Checklist
+
+- Install prompt appears on supported browsers (Chrome, Edge, Safari 16.4+)
+- App installs to home screen on mobile
+- App launches in standalone mode (no URL bar)
+- App works offline after first visit
+- Service worker caches update on new deployments
+
 ## Out of Scope (v1)
 
 - User accounts or saved calculations
 - Splits / interval calculator
 - Elevation or heart rate adjustments
 - Share or export functionality
-- PWA / service worker
