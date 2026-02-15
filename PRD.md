@@ -59,8 +59,34 @@ Results update in real-time as the user types.
 
 ### Typography
 
-- Primary font: **JetBrains Mono** (loaded from Google Fonts)
+- Primary font: **JetBrains Mono** (self-hosted via Fontsource)
 - Monospace throughout for numeric alignment
+
+### Color Palette
+
+The app uses a minimal **black, grey, and white** color scheme that adapts to system light/dark mode preference.
+
+#### Light Mode
+
+- **Background**: `#FFFFFF` (pure white)
+- **Text Primary**: `#000000` (pure black)
+- **Text Muted**: `#888888` (mid grey)
+- **Borders/Lines**: `#E5E5E5` (light grey)
+- **Results Background**: `#FAFAFA` (off-white)
+- **Primary/CTA**: `#000000` (black background, white text)
+- **Hover State**: `#333333` (dark grey)
+
+#### Dark Mode
+
+- **Background**: `#000000` (pure black)
+- **Text Primary**: `#FFFFFF` (pure white)
+- **Text Muted**: `#888888` (mid grey)
+- **Borders/Lines**: `#333333` (dark grey)
+- **Results Background**: `#0A0A0A` (near-black)
+- **Primary/CTA**: `#FFFFFF` (white background, black text)
+- **Hover State**: `#EBEBEB` (light grey)
+
+**Implementation**: All colors are defined as CSS custom properties in `src/index.css` within a `:root` block (light mode) and `@media (prefers-color-scheme: dark)` block (dark mode). Components reference these variables exclusively (e.g., `var(--color-text)`), ensuring consistent theming throughout the app.
 
 ### Layout
 
@@ -237,65 +263,6 @@ Convert the app into a Progressive Web App to enable:
 - App launches in standalone mode (no URL bar)
 - App works offline after first visit
 - Service worker caches update on new deployments
-
-## Future Enhancement: Smart Numeric Input Formatting
-
-**Status:** Not implemented in v1. Planned for future release.
-
-### Problem
-
-On mobile devices, `inputMode="numeric"` displays a number pad without easy access to colons, making it difficult to enter time values (pace and duration) that require the `:` separator.
-
-### Solution
-
-Implement real-time smart formatting that automatically inserts colons as the user types numeric-only input.
-
-### Requirements
-
-**Pace Field (mm:ss format):**
-
-- User types: `440` → auto-format to `4:40` in real-time
-- User types: `5` → display as `5` (wait for more input)
-- User types: `530` → auto-format to `5:30`
-- Right-pad with zeros and insert colon at appropriate position
-- Preserve existing manual colon input for power users
-
-**Duration Field (hh:mm:ss format):**
-
-- User types: `440` → auto-format to `4:40` in real-time
-- User types: `12030` → auto-format to `1:20:30`
-- Right-pad with zeros and insert colons at appropriate positions
-- Handle both compact format (mm:ss) and full format (hh:mm:ss) intelligently
-
-**Distance Field:**
-
-- No special formatting beyond numeric validation
-- Accept decimal input as-is
-
-### Implementation Details
-
-1. Add formatting logic to `onChange` handlers in `InputField` component or parent
-2. Create utility functions:
-   - `formatPaceInput(rawNumeric: string): string` — inserts colon for mm:ss
-   - `formatDurationInput(rawNumeric: string): string` — inserts colons for hh:mm:ss or mm:ss
-3. Update existing parsers (`parsePace`, `parseDuration`) to handle both formatted and unformatted input
-4. Maintain cursor position during formatting to avoid UX issues
-5. Keep `inputMode="numeric"` for mobile number pad
-
-### Edge Cases to Handle
-
-- Backspace/delete should work naturally
-- Cursor position must be preserved during auto-formatting
-- Partial input should display gracefully (e.g., `4` stays as `4` until more digits typed)
-- Manual colon input should still be allowed and preserved
-- Invalid sequences should be handled gracefully
-
-### Testing
-
-- Mobile: Verify number pad appears and formatting works on iOS Safari, Android Chrome
-- Desktop: Verify manual input still works with keyboard
-- Test sequences: `5`, `50`, `500`, `5000`, `50000` and verify correct formatting
-- Test backspace behavior during formatted input
 
 ## Out of Scope (v1)
 
