@@ -152,7 +152,7 @@
 
 .unit-toggle__option--active {
     background: var(--color-primary);
-    color: #ffffff;
+    color: var(--color-bg);
 }
 
 .unit-toggle__option:focus-visible {
@@ -279,7 +279,7 @@
     width: 1.125rem;
     height: 1.125rem;
     border-radius: 50%;
-    background: #ffffff;
+    background: var(--color-bg);
     transition: transform 0.2s ease;
 }
 
