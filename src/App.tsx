@@ -110,14 +110,6 @@ function App() {
         />
       </div>
       <div className="app__inputs">
-        <InputField
-          id="duration"
-          label="Duration"
-          value={input.duration}
-          onChange={(v) => updateField("duration", v)}
-          placeholder="hh:mm:ss"
-          error={errors.duration}
-        />
         <div>
           <InputField
             id="pace"
@@ -156,6 +148,14 @@ function App() {
           />
           <ConversionHint hint={distanceHint} />
         </div>
+        <InputField
+          id="duration"
+          label="Duration"
+          value={input.duration}
+          onChange={(v) => updateField("duration", v)}
+          placeholder="hh:mm:ss"
+          error={errors.duration}
+        />
       </div>
       <div className="app__actions">
         <ResetButton onClick={handleReset} />
