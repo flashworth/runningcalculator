@@ -13,18 +13,6 @@ export default function FAQ({ onClose }: FAQProps) {
       </div>
       <div className="faq__content">
         <div className="faq__item">
-          <h3 className="faq__question">Disclaimer</h3>
-          <p className="faq__answer">
-            This is an experimental project built for learning and exploration.
-            It is not a substitute for professional coaching or medical advice.
-            Race predictions are simple estimates based on pace alone and do not
-            account for terrain, elevation, weather, fatigue, fitness level, or
-            nutrition. Always listen to your body and consult a professional
-            before making training or race decisions. Use at your own risk.
-          </p>
-        </div>
-
-        <div className="faq__item">
           <h3 className="faq__question">What is this for?</h3>
           <p className="faq__answer">
             If you're like me, you love checking your running pace against your
@@ -48,6 +36,17 @@ export default function FAQ({ onClose }: FAQProps) {
             <a href="https://github.com/flashworth/runningcalculator">Github</a>
             . You can take the code and use it, modify it and share it with
             others.
+          </p>
+        </div>
+        <div className="faq__item">
+          <h3 className="faq__question">Disclaimer</h3>
+          <p className="faq__answer">
+            This is an experimental project built for learning and exploration.
+            It is not a substitute for professional coaching or medical advice.
+            Race predictions are simple estimates based on pace alone and do not
+            account for terrain, elevation, weather, fatigue, fitness level, or
+            nutrition. Always listen to your body and consult a professional
+            before making training or race decisions. Use at your own risk.
           </p>
         </div>
       </div>
