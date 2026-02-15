@@ -180,14 +180,16 @@ function App() {
           <div className="app__actions">
             <ResetButton onClick={handleReset} />
           </div>
-          <ResultsPanel result={result} />
-          {predictions && (
-            <RacePredictions
-              predictions={predictions}
-              show={input.showRacePredictions}
-              onToggle={(v) => updateField("showRacePredictions", v)}
-            />
-          )}
+          <div className="app__panels">
+            <ResultsPanel result={result} />
+            {predictions && (
+              <RacePredictions
+                predictions={predictions}
+                show={input.showRacePredictions}
+                onToggle={(v) => updateField("showRacePredictions", v)}
+              />
+            )}
+          </div>
         </>
       )}
     </div>
