@@ -15,6 +15,8 @@ import ResetButton from "./components/ResetButton";
 import ToggleSwitch from "./components/ToggleSwitch";
 import ConversionHint from "./components/ConversionHint";
 import RacePredictions from "./components/RacePredictions";
+import Navbar from "./components/Navbar";
+import FAQ from "./components/FAQ";
 import { formatPaceInput, formatDurationInput } from "./utils/inputFormatting";
 
 const STORAGE_KEY = "runningcalc_inputs";
@@ -69,6 +71,7 @@ function App() {
   const [input, setInput] = useState<InputState>(
     () => loadFromSession() ?? defaultState,
   );
+  const [showFAQ, setShowFAQ] = useState(false);
 
   const parsed = parseAllInputs(input);
   const result = calculate(parsed);
@@ -99,77 +102,93 @@ function App() {
     clearSession();
   }
 
+  function handleInfoClick() {
+    setShowFAQ(true);
+  }
+
+  function handleCloseFAQ() {
+    setShowFAQ(false);
+  }
+
   return (
     <div className="app">
-      <div className="app__header">
-        <h1 className="app__title">Open Running Calculator</h1>
-        <ToggleSwitch
-          id="show-conversions"
-          label="Show conversions"
-          checked={input.showConversions}
-          onChange={(v) => updateField("showConversions", v)}
-        />
-      </div>
-      <div className="app__inputs">
-        <div>
-          <InputField
-            id="pace"
-            label="Pace"
-            value={input.pace}
-            onChange={(v) => updateField("pace", v)}
-            placeholder="mm:ss"
-            error={errors.pace}
-            formatter={formatPaceInput}
-            unitToggle={
-              <UnitToggle
-                options={paceOptions}
-                selected={input.paceUnit}
-                onChange={(v) => updateField("paceUnit", v as PaceUnit)}
-                ariaLabel="Pace unit"
+      <Navbar onInfoClick={handleInfoClick} />
+      {showFAQ ? (
+        <FAQ onClose={handleCloseFAQ} />
+      ) : (
+        <>
+          <div className="app__header">
+            <ToggleSwitch
+              id="show-conversions"
+              label="Show conversions"
+              checked={input.showConversions}
+              onChange={(v) => updateField("showConversions", v)}
+            />
+          </div>
+          <div className="app__inputs">
+            <div>
+              <InputField
+                id="pace"
+                label="Pace"
+                value={input.pace}
+                onChange={(v) => updateField("pace", v)}
+                placeholder="mm:ss"
+                error={errors.pace}
+                formatter={formatPaceInput}
+                unitToggle={
+                  <UnitToggle
+                    options={paceOptions}
+                    selected={input.paceUnit}
+                    onChange={(v) => updateField("paceUnit", v as PaceUnit)}
+                    ariaLabel="Pace unit"
+                  />
+                }
               />
-            }
-          />
-          <ConversionHint hint={paceHint} />
-        </div>
-        <div>
-          <InputField
-            id="distance"
-            label="Distance"
-            value={input.distance}
-            onChange={(v) => updateField("distance", v)}
-            placeholder="10"
-            error={errors.distance}
-            unitToggle={
-              <UnitToggle
-                options={distanceOptions}
-                selected={input.distanceUnit}
-                onChange={(v) => updateField("distanceUnit", v as DistanceUnit)}
-                ariaLabel="Distance unit"
+              <ConversionHint hint={paceHint} />
+            </div>
+            <div>
+              <InputField
+                id="distance"
+                label="Distance"
+                value={input.distance}
+                onChange={(v) => updateField("distance", v)}
+                placeholder="10"
+                error={errors.distance}
+                unitToggle={
+                  <UnitToggle
+                    options={distanceOptions}
+                    selected={input.distanceUnit}
+                    onChange={(v) =>
+                      updateField("distanceUnit", v as DistanceUnit)
+                    }
+                    ariaLabel="Distance unit"
+                  />
+                }
               />
-            }
-          />
-          <ConversionHint hint={distanceHint} />
-        </div>
-        <InputField
-          id="duration"
-          label="Duration"
-          value={input.duration}
-          onChange={(v) => updateField("duration", v)}
-          placeholder="hh:mm:ss"
-          error={errors.duration}
-          formatter={formatDurationInput}
-        />
-      </div>
-      <div className="app__actions">
-        <ResetButton onClick={handleReset} />
-      </div>
-      <ResultsPanel result={result} />
-      {predictions && (
-        <RacePredictions
-          predictions={predictions}
-          show={input.showRacePredictions}
-          onToggle={(v) => updateField("showRacePredictions", v)}
-        />
+              <ConversionHint hint={distanceHint} />
+            </div>
+            <InputField
+              id="duration"
+              label="Duration"
+              value={input.duration}
+              onChange={(v) => updateField("duration", v)}
+              placeholder="hh:mm:ss"
+              error={errors.duration}
+              formatter={formatDurationInput}
+            />
+          </div>
+          <div className="app__actions">
+            <ResetButton onClick={handleReset} />
+          </div>
+          <ResultsPanel result={result} />
+          {predictions && (
+            <RacePredictions
+              predictions={predictions}
+              show={input.showRacePredictions}
+              onToggle={(v) => updateField("showRacePredictions", v)}
+            />
+          )}
+        </>
       )}
     </div>
   );

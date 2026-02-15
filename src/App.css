@@ -1,3 +1,43 @@
+/* ── Navbar ── */
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    margin: 0 -1.5rem 1.5rem -1.5rem;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.navbar__title {
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.navbar__info-button {
+    font-family: var(--font-mono);
+    font-size: 16px;
+    font-weight: 400;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    color: var(--color-text-muted);
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: opacity 0.15s ease;
+}
+
+.navbar__info-button:hover {
+    opacity: 0.7;
+}
+
+.navbar__info-button:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
 /* ── App layout ── */
 
 .app {
@@ -9,25 +49,23 @@
 .app__header {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     gap: 0.75rem;
     margin-bottom: 1.5rem;
-}
-
-.app__title {
-    font-size: 1.25rem;
-    font-weight: 700;
-    text-align: center;
+    margin-top: 1.5rem;
+    padding: 0 1.5rem;
 }
 
 .app__inputs {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    padding: 0 1.5rem;
 }
 
 .app__actions {
     margin-top: 1rem;
+    padding: 0 1.5rem;
 }
 
 /* ── Input field ── */
@@ -129,7 +167,7 @@
 /* ── Results panel ── */
 
 .results-panel {
-    margin-top: 1.5rem;
+    margin: 1.5rem 1.5rem 0 1.5rem;
     padding: 1rem;
     background: var(--color-results-bg);
     border: 1px solid var(--color-border);
@@ -271,7 +309,7 @@
 /* ── Race predictions ── */
 
 .race-predictions {
-    margin-top: 1rem;
+    margin: 1rem 1.5rem 0 1.5rem;
     padding: 1rem;
     background: var(--color-results-bg);
     border: 1px solid var(--color-border);
@@ -309,26 +347,105 @@
     font-weight: 700;
 }
 
+/* ── FAQ ── */
+
+.faq {
+    padding: 1.5rem;
+    overflow-y: auto;
+}
+
+.faq__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.faq__title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.faq__close-button {
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+    font-weight: 300;
+    padding: 0;
+    width: 2rem;
+    height: 2rem;
+    background: transparent;
+    color: var(--color-text-muted);
+    border: none;
+    cursor: pointer;
+    transition: color 0.15s ease;
+    line-height: 1;
+}
+
+.faq__close-button:hover {
+    color: var(--color-text);
+}
+
+.faq__close-button:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+.faq__content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.faq__item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.faq__question {
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.faq__answer {
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+    margin: 0;
+}
+
 /* ── Responsive ── */
 
 @media (min-width: 640px) {
     .app {
-        padding: 3rem 0;
+        padding: 0;
+        border-left: 1px solid var(--color-border);
+        border-right: 1px solid var(--color-border);
+    }
+
+    .navbar {
+        margin: 0;
+        padding: 1.5rem 2rem;
     }
 
     .app__header {
         margin-bottom: 2rem;
-    }
-
-    .app__title {
-        font-size: 1.5rem;
+        padding: 0 2rem;
     }
 
     .app__inputs {
         gap: 1.25rem;
+        padding: 0 2rem;
+    }
+
+    .app__actions {
+        padding: 0 2rem;
     }
 
     .results-panel {
+        margin: 1.5rem 2rem 0 2rem;
         padding: 1.25rem;
     }
 
@@ -345,10 +462,15 @@
     }
 
     .race-predictions {
+        margin: 1rem 2rem 2rem 2rem;
         padding: 1.25rem;
     }
 
     .race-predictions__time {
         font-size: 1rem;
+    }
+
+    .faq {
+        padding: 2rem;
     }
 }
