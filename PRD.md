@@ -81,7 +81,7 @@ Results update in real-time as the user types.
 
 - Large, clearly labeled text inputs
 - Unit toggle rendered as a segmented control adjacent to each relevant field
-- Placeholder text showing expected format (e.g., `MM:SS`)
+- Placeholder text showing expected format: `hh:mm:ss` for duration, `mm:ss` for pace
 - Clear/reset button to empty all fields
 
 ### Results Panel
@@ -153,6 +153,37 @@ runningcalc/
 - Works offline after initial load (static SPA)
 - No backend, no API calls, no analytics, no cookies — pure client-side
 - No data leaves the browser — all computation and storage is local
+
+## Inline Unit Conversion Hints
+
+When the **Pace** or **Distance** input contains a valid value, a small hint line appears directly beneath the field showing the equivalent value in the other unit system. For example:
+
+- Pace input `4:40` with unit `/km` → hint: `7:31 /mi`
+- Pace input `8:00` with unit `/mi` → hint: `4:58 /km`
+- Distance input `5` with unit `km` → hint: `3.11 mi`
+- Distance input `3` with unit `mi` → hint: `4.83 km`
+
+This feature is controlled by a **toggle switch** in the app header area. The toggle is labeled "Show conversions" and defaults to **on**. Its state is persisted in sessionStorage alongside the input state. When toggled off, the hint lines are hidden.
+
+The hint text should be small, muted, and non-intrusive — it supplements the input without cluttering the UI.
+
+## Race Time Predictions
+
+Below the results panel, a **Race Predictions** section shows estimated finish times for common race distances based on the user's current pace. The predicted distances are:
+
+| Race          | Distance           |
+| ------------- | ------------------ |
+| 5K            | 5 km               |
+| 10K           | 10 km              |
+| 8 Mile        | 8 miles (12.87 km) |
+| Half Marathon | 21.0975 km         |
+| Marathon      | 42.195 km          |
+
+Predictions are calculated by multiplying the user's pace (seconds per km) by each race distance in km. They are displayed as `HH:MM:SS` finish times.
+
+This section is only visible when a valid pace can be derived (i.e., the results panel is showing). It is controlled by its own **toggle switch** labeled "Show race predictions", positioned at the top of the section. The toggle defaults to **on** and its state is persisted in sessionStorage.
+
+The section should be visually distinct from the results panel — same card-style treatment but clearly a separate block. Each race is shown on its own row with the race name on the left and the predicted time on the right.
 
 ## Out of Scope (v1)
 
