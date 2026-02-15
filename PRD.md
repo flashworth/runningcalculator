@@ -1,4 +1,4 @@
-# Running Calculator - Product Requirements Document
+# Open Running Calculator - Product Requirements Document
 
 ## Overview
 

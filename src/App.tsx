@@ -102,7 +102,7 @@ function App() {
   return (
     <div className="app">
       <div className="app__header">
-        <h1 className="app__title">Running Calculator</h1>
+        <h1 className="app__title">Open Running Calculator</h1>
         <ToggleSwitch
           id="show-conversions"
           label="Show conversions"
@@ -110,69 +110,67 @@ function App() {
           onChange={(v) => updateField("showConversions", v)}
         />
       </div>
-        <div className="app__inputs">
-          <div>
-            <InputField
-              id="pace"
-              label="Pace"
-              value={input.pace}
-              onChange={(v) => updateField("pace", v)}
-              placeholder="mm:ss"
-              error={errors.pace}
-              formatter={formatPaceInput}
-              unitToggle={
-                <UnitToggle
-                  options={paceOptions}
-                  selected={input.paceUnit}
-                  onChange={(v) => updateField("paceUnit", v as PaceUnit)}
-                  ariaLabel="Pace unit"
-                />
-              }
-            />
-            <ConversionHint hint={paceHint} />
-          </div>
-          <div>
-            <InputField
-              id="distance"
-              label="Distance"
-              value={input.distance}
-              onChange={(v) => updateField("distance", v)}
-              placeholder="10"
-              error={errors.distance}
-              unitToggle={
-                <UnitToggle
-                  options={distanceOptions}
-                  selected={input.distanceUnit}
-                  onChange={(v) =>
-                    updateField("distanceUnit", v as DistanceUnit)
-                  }
-                  ariaLabel="Distance unit"
-                />
-              }
-            />
-            <ConversionHint hint={distanceHint} />
-          </div>
+      <div className="app__inputs">
+        <div>
           <InputField
-            id="duration"
-            label="Duration"
-            value={input.duration}
-            onChange={(v) => updateField("duration", v)}
-            placeholder="hh:mm:ss"
-            error={errors.duration}
-            formatter={formatDurationInput}
+            id="pace"
+            label="Pace"
+            value={input.pace}
+            onChange={(v) => updateField("pace", v)}
+            placeholder="mm:ss"
+            error={errors.pace}
+            formatter={formatPaceInput}
+            unitToggle={
+              <UnitToggle
+                options={paceOptions}
+                selected={input.paceUnit}
+                onChange={(v) => updateField("paceUnit", v as PaceUnit)}
+                ariaLabel="Pace unit"
+              />
+            }
           />
+          <ConversionHint hint={paceHint} />
         </div>
-        <div className="app__actions">
-          <ResetButton onClick={handleReset} />
-        </div>
-        <ResultsPanel result={result} />
-        {predictions && (
-          <RacePredictions
-            predictions={predictions}
-            show={input.showRacePredictions}
-            onToggle={(v) => updateField("showRacePredictions", v)}
+        <div>
+          <InputField
+            id="distance"
+            label="Distance"
+            value={input.distance}
+            onChange={(v) => updateField("distance", v)}
+            placeholder="10"
+            error={errors.distance}
+            unitToggle={
+              <UnitToggle
+                options={distanceOptions}
+                selected={input.distanceUnit}
+                onChange={(v) => updateField("distanceUnit", v as DistanceUnit)}
+                ariaLabel="Distance unit"
+              />
+            }
           />
-        )}
+          <ConversionHint hint={distanceHint} />
+        </div>
+        <InputField
+          id="duration"
+          label="Duration"
+          value={input.duration}
+          onChange={(v) => updateField("duration", v)}
+          placeholder="hh:mm:ss"
+          error={errors.duration}
+          formatter={formatDurationInput}
+        />
+      </div>
+      <div className="app__actions">
+        <ResetButton onClick={handleReset} />
+      </div>
+      <ResultsPanel result={result} />
+      {predictions && (
+        <RacePredictions
+          predictions={predictions}
+          show={input.showRacePredictions}
+          onToggle={(v) => updateField("showRacePredictions", v)}
+        />
+      )}
     </div>
   );
 }

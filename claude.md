@@ -1,8 +1,8 @@
-# Running Calculator
+# Open Running Calculator
 
 ## What This Is
 
-A single-page running calculator built with React, Vite, and TypeScript. Given any two of duration/pace/distance, it computes the missing values and displays results in both km and miles.
+A single-page Open Running Calculator built with React, Vite, and TypeScript. Given any two of duration/pace/distance, it computes the missing values and displays results in both km and miles.
 
 See `PRD.md` for full product requirements.
 

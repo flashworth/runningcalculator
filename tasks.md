@@ -1,4 +1,4 @@
-# Running Calculator - Tasks
+# Open Running Calculator - Tasks
 
 ## Phase 1: Project Scaffolding
 
