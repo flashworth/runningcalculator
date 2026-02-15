@@ -6,7 +6,7 @@ import {
   calculate,
   getConvertedPaceHint,
   getConvertedDistanceHint,
-  getRacePredictions,
+  getRacePredictionsFromInputs,
 } from "./utils/calculations";
 import InputField from "./components/InputField";
 import UnitToggle from "./components/UnitToggle";
@@ -77,7 +77,7 @@ function App() {
   const result = calculate(parsed);
   const errors = validateInputs(input);
 
-  const predictions = result ? getRacePredictions(result) : null;
+  const predictions = getRacePredictionsFromInputs(parsed);
 
   const paceHint = input.showConversions
     ? getConvertedPaceHint(input.pace, input.paceUnit)

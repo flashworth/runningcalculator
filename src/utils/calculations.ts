@@ -154,3 +154,20 @@ export function getRacePredictions(
     durationSeconds: result.paceSecondsPerKm * distanceKm,
   }));
 }
+
+/** Given parsed inputs, predict finish times if pace is available (even without full calculation). */
+export function getRacePredictionsFromInputs(
+  parsed: ParsedInputs,
+): RacePrediction[] | null {
+  const { paceSeconds, paceUnit } = parsed;
+  if (paceSeconds === null) return null;
+
+  const pacePerKm = convertPaceToPerKm(paceSeconds, paceUnit);
+  if (pacePerKm <= 0) return null;
+
+  return RACE_DISTANCES.map(({ name, distanceKm }) => ({
+    name,
+    distanceKm,
+    durationSeconds: pacePerKm * distanceKm,
+  }));
+}
