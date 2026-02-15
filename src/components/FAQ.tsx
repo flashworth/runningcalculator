@@ -13,6 +13,15 @@ export default function FAQ({ onClose }: FAQProps) {
       </div>
       <div className="faq__content">
         <div className="faq__item">
+          <h3 className="faq__question">⚠️ Disclaimer</h3>
+          <p className="faq__answer">
+            This is an experimental project built for learning and exploration.
+            While we strive for accuracy, please verify calculations for any
+            important use cases. Use at your own risk.
+          </p>
+        </div>
+
+        <div className="faq__item">
           <h3 className="faq__question">What is this for?</h3>
           <p className="faq__answer">
             If you're like me, you love checking your running pace against your
