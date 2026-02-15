@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import type { ReactNode } from "react";
 
 interface InputFieldProps {
   label: string;
@@ -8,6 +8,7 @@ interface InputFieldProps {
   error: string | null;
   id: string;
   unitToggle?: ReactNode;
+  formatter?: (value: string) => string;
 }
 
 export default function InputField({
@@ -18,7 +19,12 @@ export default function InputField({
   error,
   id,
   unitToggle,
+  formatter,
 }: InputFieldProps) {
+  function handleChange(rawValue: string) {
+    const formatted = formatter ? formatter(rawValue) : rawValue;
+    onChange(formatted);
+  }
   const errorId = `${id}-error`;
 
   return (
@@ -30,9 +36,9 @@ export default function InputField({
         <input
           type="text"
           id={id}
-          className={`input-field__input${error ? ' input-field__input--error' : ''}`}
+          className={`input-field__input${error ? " input-field__input--error" : ""}`}
           value={value}
-          onChange={(e) => onChange(e.target.value)}
+          onChange={(e) => handleChange(e.target.value)}
           placeholder={placeholder}
           inputMode="decimal"
           autoComplete="off"

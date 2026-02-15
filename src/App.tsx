@@ -15,6 +15,7 @@ import ResetButton from "./components/ResetButton";
 import ToggleSwitch from "./components/ToggleSwitch";
 import ConversionHint from "./components/ConversionHint";
 import RacePredictions from "./components/RacePredictions";
+import { formatPaceInput, formatDurationInput } from "./utils/inputFormatting";
 
 const STORAGE_KEY = "runningcalc_inputs";
 
@@ -118,6 +119,7 @@ function App() {
             onChange={(v) => updateField("pace", v)}
             placeholder="mm:ss"
             error={errors.pace}
+            formatter={formatPaceInput}
             unitToggle={
               <UnitToggle
                 options={paceOptions}
@@ -155,6 +157,7 @@ function App() {
           onChange={(v) => updateField("duration", v)}
           placeholder="hh:mm:ss"
           error={errors.duration}
+          formatter={formatDurationInput}
         />
       </div>
       <div className="app__actions">
