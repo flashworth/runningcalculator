@@ -17,6 +17,7 @@ import ConversionHint from "./components/ConversionHint";
 import RacePredictions from "./components/RacePredictions";
 import Navbar from "./components/Navbar";
 import FAQ from "./components/FAQ";
+import Footer from "./components/Footer";
 import { formatPaceInput, formatDurationInput } from "./utils/inputFormatting";
 
 const STORAGE_KEY = "runningcalc_inputs";
@@ -192,6 +193,7 @@ function App() {
           </div>
         </>
       )}
+      <Footer />
     </div>
   );
 }
